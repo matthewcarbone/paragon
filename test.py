@@ -8,6 +8,7 @@ __status__ = "Prototype"
 
 import os
 import yaml
+import sys
 import subprocess
 
 from paragon import core
@@ -111,6 +112,6 @@ class TestCore(Initializer):
 if __name__ == '__main__':
 
     # Run checks
-    TestCore().test_save_load()
+    TestCore(default_path=sys.argv[1]).test_save_load()
 
     print("hello world")
