@@ -14,5 +14,5 @@ python:
   - '3.6'
   - '3.7'
 script:
-  - coverage run --source=paragon python3 test.py $TRAVIS_BUILD_DIR
+  - coverage run --source=paragon python3 test.py
 after_success: coveralls

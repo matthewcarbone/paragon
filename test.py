@@ -112,6 +112,6 @@ class TestCore(Initializer):
 if __name__ == '__main__':
 
     # Run checks
-    TestCore(default_path=sys.argv[1]).test_save_load()
+    TestCore()
 
     print("hello world")
