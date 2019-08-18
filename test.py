@@ -102,12 +102,11 @@ class TestCore(Initializer):
         _path = os.path.join(self.default_path, name + extension)
         with open(_path) as file:
             p_set_loaded = yaml.safe_load(file)
-        for key, value in self.p.items():
+        for key, __ in self.p.items():
             entry1 = self.p[key]
             entry2 = p_set_loaded[key]
-            assert entry1 == entry2
-
-        self.delete()
+            if entry1 != entry2:
+                raise AssertionError()
 
 
 if __name__ == '__main__':
