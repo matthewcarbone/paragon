@@ -1,0 +1,17 @@
+sudo: required
+language: python3
+notifications:
+  email:
+    recipients:
+      - x94carbone@gmail.com
+    on_success: never
+    on_failure: always
+install:
+  - pip install coveralls
+python:
+  - '3.5'
+  - '3.6'
+  - '3.7'
+script:
+  - coverage run --source=paragon python3 test.py
+after_success: coveralls
