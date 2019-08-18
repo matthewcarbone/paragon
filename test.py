@@ -56,7 +56,7 @@ class Initializer:
 
         """
 
-        subprocess.call('rm -r %s' % self.default_path, shell=True)
+        subprocess.call(['rm', '-r', '%s' % self.default_path])
 
 
 class TestCore(Initializer):
@@ -106,6 +106,8 @@ class TestCore(Initializer):
             entry1 = self.p[key]
             entry2 = p_set_loaded[key]
             assert entry1 == entry2
+
+        self.delete()
 
 
 if __name__ == '__main__':
