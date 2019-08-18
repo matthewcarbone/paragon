@@ -1,6 +1,6 @@
 sudo: required
-language: python3
-before_install: cd paragon
+language: python
+# before_install: cd paragon
 notifications:
   email:
     recipients:
@@ -14,5 +14,5 @@ python:
   - '3.6'
   - '3.7'
 script:
-  - coverage run --source=paragon python3 test.py
+  - coverage run --source=paragon ./test.py
 after_success: coveralls
