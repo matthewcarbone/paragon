@@ -1,5 +1,6 @@
 sudo: required
 language: python3
+before_script: cd paragon
 notifications:
   email:
     recipients:
