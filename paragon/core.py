@@ -7,6 +7,97 @@ __status__ = "Prototype"
 
 import yaml
 import os
+import itertools
+
+
+class GroupParameterSet:
+    """Contains a set of SingleParameterSet classes. A set of lists are input
+    to this class as various sets of parameters to be iterated over. Each
+    combination constitutes a SingleParameterSet.
+
+    Attributes
+    ----------
+    d: dict
+    run_path : str
+
+    Notes
+    -----
+        See __init__ for details on attributes.
+
+    """
+
+    def __init__(self, d, run_path):
+        """Initializes the GroupParameterSet class. Each possible permutation
+        of the parameter space is assigned a unique hash which can be cross
+        referenced to the precise directory by a master parameter list.
+
+        Parameters
+        ----------
+        d : dict
+            Pythonic dictionary in the following form
+
+            d = {
+                'property_1' : [value_1, value_2, value_3, ..., value_N],
+                'property_2' : [value_1', value_2', value_3', ..., value_M'],
+                ...
+            }
+
+            The dictionary is structured as follows. Each key's value is a list
+            of possible values for parameters corresponding to the key. The
+            class settings determine whether or not a subset of the total
+            parameter space is sampled, all permutations are sampled, or if
+            the lists are meant to be read in a 1-1 correspondence (e.g.,
+            value_1 corresponds to value_1', value_1'', value_1''', etc).
+
+        run_path : str
+            Absolute path pointing to where all data for this group of runs
+            will be saved.
+
+        >>> keys, values = zip(*config_overrides.items())
+        >>> experiments = [dict(zip(keys, v)) for v in itertools.product(*values)]
+
+        """
+
+        self.d = d
+        self.run_path = run_path
+
+        # secrets.token_hex(nbytes=16)
+
+    def parser(self, protocol='all_permutations'):
+        """Parses the input dictionary in one of two ways. 1) Constructs all
+        permutations or 2) constructs a 1-1 correspondence, which requires that
+        each list is of the same length.
+
+        Parameters
+        ----------
+        protocol : {'all_permutations', 'one_to_one'}
+            Determines the parsing method, each of which is described in this
+            docstring and in the doctring of __init__.
+
+        """
+
+        if protocol == 'all_permutations':
+
+
+
+
+    def init_dataframe(sel):
+        """
+        Something like 
+
+        jobs = pd.DataFrame(parse_all_jobs(p, args),
+                        columns=['Atom', 'Sort', 'Cutoff', 'Displace'])
+        dir_hashes = [secrets.token_hex(nbytes=8) for __ in range(len(jobs))]
+
+        if len(set(dir_hashes)) != len(dir_hashes):
+            raise RuntimeError("Hash conflict. Play the lottery!")
+
+        dir_names = pd.DataFrame(dir_hashes, columns=['Hash'])
+        jobs = pd.concat([dir_names, jobs], axis=1)
+        create_all_directories(p, jobs, args.name)
+        """
+
+        pass
 
 
 class SingleParameterSet:
@@ -76,4 +167,3 @@ class SingleParameterSet:
         else:
             raise RuntimeError(
                 "Unsupported extension %s for saving parameters." % extension)
-
